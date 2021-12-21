@@ -41,7 +41,6 @@ CREATE TABLE SanPham(
 	HinhAnh varchar(30),
 	Gia int,
 	GiaGiam int,
-	SoLuongCon int,
 	MoTa nvarchar(1000),
 	NgayTao datetime,
 	NgayCapNhat datetime,
@@ -51,10 +50,59 @@ CREATE TABLE SanPham(
 	FOREIGN KEY(MaLoaiSanPham) REFERENCES LoaiSanPham(MaLoaiSanPham) ON DELETE CASCADE ON UPDATE CASCADE
 )
 
+CREATE TABLE DungLuong(
+	ID int IDENTITY(1,1) PRIMARY KEY,
+	KichThuoc int,
+)
+
+CREATE TABLE SanPham_DungLuong(
+	MaSanPham int,
+	ID int, 
+	SoLuongCon int,
+	FOREIGN KEY(MaSanPham) REFERENCES SanPham(MaSanPham) ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY(ID) REFERENCES DungLuong(ID) ON DELETE CASCADE ON UPDATE CASCADE
+)
+
+
+CREATE TABLE MauSac(
+	ID int IDENTITY(1,1) PRIMARY KEY,
+	TenMau nvarchar(30), 
+	MaSanPham int,
+	FOREIGN KEY(MaSanPham) REFERENCES SanPham(MaSanPham) ON DELETE CASCADE ON UPDATE CASCADE
+)
+
+CREATE TABLE SanPham_MauSac(
+	MaSanPham int,
+	ID int, 
+	SoLuongCon int,
+	FOREIGN KEY(MaSanPham) REFERENCES SanPham(MaSanPham) ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY(ID) REFERENCES DungLuong(ID) ON DELETE CASCADE ON UPDATE CASCADE
+)
+
 ///
 
 CREATE TABLE MENU(
 	MaDanhMuc int IDENTITY(1,1) PRIMARY KEY,
 	TenDanhMuc nvarchar(30),
 	Link varchar(100)
+)
+
+CREATE TABLE HoaDon(
+	MaHoaDon int IDENTITY(1,1) PRIMARY KEY,
+	TongTien int,
+	NgayLapHoaDon datetime,
+	TrangThai nvarchar(30),
+	MaThongTinLienHe_KhachHang int,
+	ID int,
+	FOREIGN KEY(ID) REFERENCES TaiKhoan(ID) ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY(MaThongTinLienHe_KhachHang) REFERENCES ThongTinLienHe_KhachHang(MaThongTinLienHe_KhachHang) ON DELETE CASCADE ON UPDATE CASCADE
+)
+
+CREATE TABLE ChiTietHoaDon(
+	MaHoaDon int,
+	MaSanPham int,
+	SoLuong int,
+	FOREIGN KEY(MaHoaDon) REFERENCES HoaDon(MaHoaDon) ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY(MaSanPham) REFERENCES SanPham(MaSanPham) ON DELETE CASCADE ON UPDATE CASCADE,
+	PRIMARY KEY(MaHoaDon, MaSanPham)
 )
