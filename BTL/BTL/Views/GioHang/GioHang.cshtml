@@ -1,0 +1,54 @@
+﻿@using BTL.Models
+@{
+    ViewBag.Title = "GioHang";
+    Layout = "~/Views/Shared/_LayoutClient.cshtml";
+}
+
+@{
+    var gioHang = Session["GioHang"] as List<GioHang>;
+}
+
+<div class="content">
+    <h1 style="text-align: center; padding: 20px 0px;">Giỏ hàng</h1>
+    <table border="2" style="width: 100%; text-align: center;">
+        <tr>
+            <th></th>
+            <th></th>
+            <th>Sản phẩm</th>
+            <th>Đơn Giá</th>
+            <th>Số lượng</th>
+            <th>Tạm tính</th>
+            <th></th>
+        </tr>
+        @foreach (var item in gioHang)
+        {
+    <tr>
+        <td> <a href="@Url.Action("XoaSanPham", "GioHang", new { item.MaSanPham, item.Id_MauSac, item.Id_DungLuong })"><i class="ti-close"></i></a></td>
+        <td><img src="~/wwwroot/images/sanpham/@item.HinhAnh" alt="" style="width: 100px; height: 100px;"></td>
+        <td>@item.TenSanPham</td>
+        <td>@item.Gia</td>
+        @using (Html.BeginForm("CapNhatGioHang", "Giohang", new { item.MaSanPham, item.Id_MauSac, item.Id_DungLuong }))
+        {
+            <td><input type="number" name="txtSoLuong" id="" min="1" value="@item.SoLuong"></td>
+            <td>@item.ThanhTien</td>
+            <td><input type="submit" name="name" value="Cập nhật giỏ hàng" style="padding: 10px; 
+                        margin: 10px 100px; font-size: 16px; background: #000; color: #fff; 
+                        border: none; border-radius: 10px; font-weight: bold; cursor: pointer;"/></td>
+        }
+
+    </tr>
+        }
+        <tr>
+            <td colspan="7">
+                Tổng tiền: @ViewBag.TongTien
+            </td>
+            
+        </tr>
+        <tr>
+            <td colspan="7">
+                <a href="@Url.Action("DatHang", "GioHang")"><button style="padding: 10px 30px; margin: 10px 100px; font-size: 16px; background: #000; color: #fff; border: none; border-radius: 10px; font-weight: bold; cursor: pointer;">Thanh toán</button></a>
+            </td>
+        </tr>
+    </table>
+</div>
+

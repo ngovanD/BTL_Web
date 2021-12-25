@@ -3,74 +3,55 @@
     ViewBag.Title = "Home Page";
 }
 
-<div id="content" class="slideShow" style="padding-top: 40%; background: url(@Url.Content("~/wwwroot/images/download.jpg")) top center/cover no-repeat;">
+@using BTL.Models
 
-</div>
-<div id="content_1" class="slideShow" style="padding-top: 40%; background:  url(@Url.Content("~/wwwroot/images/apple-fall-event-2021.jpeg")) top center/cover no-repeat;">
+@{
+    var listSlide = ViewBag.listSlide as List<Slide>;
+    var listLoaiSanPham = ViewBag.listLoaiSanPham as List<LoaiSanPham>;
+}
 
-</div>
-<div id="content_2" class="slideShow" style="padding-top: 40%; background: url(@Url.Content("~/wwwroot/images/collage.jpg")) top center/cover no-repeat; ">
+@foreach (var item in listSlide)
+{
 
-</div>
-<div id="content_3" class="slideShow" style="padding-top: 40%; background: url(@Url.Content("~/wwwroot/images/images.jpg")) top center/cover no-repeat; ">
+    <div class="slideShow" style="padding-top: 40%; background: url(@Url.Content("~/wwwroot/images/slides/" + item.HinhAnh)) top center/cover no-repeat;">
 
-</div>
-<div id="content_4" class="slideShow" style="padding-top: 40%; background: url(@Url.Content("~/wwwroot/images/san-pham-cua-apple-2021-hinh1_800x450.jpg")) top center/cover no-repeat; ">
-
-</div>
+    </div>
+}
 
 <div id="list-sanPham">
-    <div class="sanPham">
-        <a href="./iPhone.html"><img src="~/wwwroot/images/iPhone.png" alt="iPhone" class="sanPham-img"></a>
-        <a href="./iPhone.html" class="text-sanPham">iPhone</a>
-    </div>
-    <div class="sanPham">
-        <a href="./iPad.html"><img src="~/wwwroot/images/iPad.png" alt="iPad" class="sanPham-img"></a>
-        <a href="./iPad.html" class="text-sanPham">iPad</a>
-    </div>
-    <div class="sanPham">
-        <a href="./MacBook.html"><img src="~/wwwroot/images/Mac.png" alt="MacBook" class="sanPham-img"></a>
-        <a href="./MacBook.html" class="text-sanPham" style="left: 30px;">MacBook Pro 14 và 16-inch</a>
-    </div>
-    <div class="clear"></div>
-    <div class="sanPham">
-        <a href="./iPad.html"><img src="~/wwwroot/images/iPadPro.png" alt="iPadPro" class="sanPham-km-img"></a>
-        <a href="./iPad.html" class="text-sanPham" style="left: 110px;">iPad Pro M1</a>
-    </div>
-    <div class="sanPham">
-        <a href="./phuKien.html"><img src="~/wwwroot/images/phuKien.png" alt="phuKien" class="sanPham-km-img"></a>
-        <a href="./style_phuKien.css" class="text-sanPham" style="left: 30px;">Phụ kiện Apple chính hãng</a>
-    </div>
-    <div class="sanPham">
-        <a href="./AirPod.html"><img src="~/wwwroot/images/AirPods.png" alt="AirPods" class="sanPham-km-img"></a>
-        <a href="./AirPod.html" class="text-sanPham" style="left: 90px;">Tai nghe AirPods</a>
-    </div>
+    @foreach (var item in listLoaiSanPham)
+    {
+        <div class="sanPham">
+            <a href="@Url.Action("TrangTheoTungSanPham", "LoaiSanPham", new {maLoaiSanPham = @item.MaLoaiSanPham})"><img src="~/wwwroot/images/loaisanpham/@item.HinhAnh" alt="iPhone" class="sanPham-img sanPham-km-img"></a>
+            <a href="@Url.Action("TrangTheoTungSanPham", "LoaiSanPham", new {maLoaiSanPham = @item.MaLoaiSanPham})" class="text-sanPham">@item.TenLoaiSanPham</a>
+        </div>
+    }
     <div class="clear"></div>
 </div>
-<div id="slider">
+<div id="slider" style="background: url(@Url.Content("~/wwwroot/images/Desktop-Ưu-dãi-nhân-viên-2048x939.png")) top center/cover no-repeat;">
     <div class="text-slider">
-        <h1>Dành cho Doanh nghiệp</h1><br>
-        <h3>Chương trình dành riêng cho:</h3>
-        <ul>
-            <li>Doanh nghiệp</li>
-            <li>Tổ chức</li>
-            <li>Trường học</li>
-            <li>Y Tế</li>
-            <li>Chính phủ</li>
-            <li>Đối tác dự án</li>
-        </ul>
-        <a href="" class="btn-lh">Liên hệ nhận báo giá</a>
-    </div>
+    <h1>Dành cho Doanh nghiệp</h1><br>
+    <h3>Chương trình dành riêng cho:</h3>
+    <ul>
+        <li>Doanh nghiệp</li>
+        <li>Tổ chức</li>
+        <li>Trường học</li>
+        <li>Y Tế</li>
+        <li>Chính phủ</li>
+        <li>Đối tác dự án</li>
+    </ul>
+    <a href="" class="btn-lh">Liên hệ nhận báo giá</a>
+</div>
     <!-- <div class="clear"></div>           -->
 </div>
 <div id="news">
     <h1>Yêu Apple, đến ShopDunk</h1>
     <div class="list-news">
-        <a href=""><img src="./images/Ảnh-1.jpeg" alt=""></a>
+        <a href=""><img src="~/wwwroot/images/Ảnh-1.jpeg" alt=""></a>
         <p class="text-news">ShopDunk khai trương 3 cửa hàng Mono Store tháng 12/2021</p>
     </div>
     <div class="list-news">
-        <a href=""><img src="./images/Ảnh-2.jpeg" alt=""></a>
+        <a href=""><img src="~/wwwroot/images/Ảnh-2.jpeg" alt=""></a>
         <p class="text-news">Trải nghiệm cửa hàng Apple thổ cẩm cùng Vinh Vật Vờ </p>
     </div>
 </div>
@@ -89,58 +70,6 @@
         <a href="./traGop.html"><i class="far fa-comments"></i></a>
         <a href="./traGop.html" class="text-feature">Thủ tục trả góp</a>
         <p class="sub-feature">Mọi sản phẩm đều có thể áp dụng chương trình trả góp </p>
-    </div>
-    <div class="clear"></div>
-</div>
-<div id="introduce">
-    <img src="./images/logo-black-p9zi6fzjztstkzq7o44ox4rx3byzw3ztdhy6dfyb8i.jpeg" alt="logo" class="intro-img">
-    <p class="text-intro">Là chuỗi siêu thị được thành lập từ 2010 tại Hà Nội, sau đó tái cấu trúc vào 2016 và thuộc quyền sở hữu của công ty Hesman, ShopDunk chính thức trở thành đại lý ủy quyền Apple (Apple Authorized Reseller) từ tháng 9/2020. Với kinh nghiệm và đam mê sản phẩm Apple chúng tôi mong muốn đem trải nghiệm tốt nhất về sản phẩm và dịch vụ của Apple tới toàn bộ người dùng tại Việt Nam.</p>
-</div>
-<div id="service">
-    <div class="text-service">
-        <p>Thông tin</p>
-        <ul>
-            <li><a href="">Giới thiệu</a></li>
-            <li><a href="">Khuyến mại</a></li>
-            <li><a href="">Tuyển dụng</a></li>
-            <li><a href="">Hệ thống cửa hàng</a></li>
-            <li><a href="">Blog ShopDunk</a></li>
-        </ul>
-    </div>
-    <div class="text-service">
-        <p>Chính sách</p>
-        <ul>
-            <li><a href="">Chính sách đổi trả</a></li>
-            <li><a href="">Chính sách bảo mật</a></li>
-            <li><a href="">Chính sách hoạt động chung</a></li>
-            <li><a href="">Chính sách trả góp</a></li>
-            <li><a href="">Chính sách bảo hành</a></li>
-            <li><a href="">Chính sách Ship - COD</a></li>
-            <li><a href="">Hướng dẫn mua hàng</a></li>
-            <li><a href="">Hướng dẫn Check IMEI</a></li>
-        </ul>
-    </div>
-    <div class="text-service">
-        <p>Liên hệ</p>
-        <ul>
-            <li>Gọi tư vấn mua hàng: <a href="" style="font-weight: bold;">1900.6626</a></li>
-            <li>Gọi khiếu nại: <a href="" style="font-weight: bold;">0886.308.688</a></li>
-            <li>Dành cho Doanh nghiệp & Đối tác: <a href="" style="font-weight: bold;">0972.927.907</a></li>
-
-        </ul>
-    </div>
-    <div class="register-service">
-        <a href=""><img src="./images/bocongthuong@2x-paqabmyksq4df3tgvdpemfeznx0o7oq3w3pneorlci.png" alt="Bo Cong Thuong"></a>
-        <div class="register-icons">
-            <i class="fab fa-cc-mastercard"></i>
-            <i class="fab fa-cc-visa"></i>
-            <i class="fas fa-hand-holding-usd"></i>
-            <i class="fas fa-money-check-alt"></i>
-        </div>
-        <h2>Đăng ký nhận thông tin từ ShopDunk</h2>
-        <p style="font-size: 12px; margin: 8px 0px;">Nhận thông tin sản phẩm mới và chương trình khuyến mại của ShopDunk</p>
-        <input type="email" name="" id="" class="register-email" placeholder="Nhập email của bạn...">
-        <button type="submit" class="register-btn"><i class="fas fa-paper-plane"></i> Đăng ký</button>
     </div>
     <div class="clear"></div>
 </div>

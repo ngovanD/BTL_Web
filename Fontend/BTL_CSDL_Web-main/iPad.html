@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>iPad</title>
-    <link rel="stylesheet" href="./CSS/style_iPad.css">
+    <link rel="stylesheet" href="./CSS/style_iPhone.css">
     <link rel="stylesheet" href="./themify-icons/themify-icons.css">
     <link rel="stylesheet" href="./fontawesome-free-5.15.4-web/css/all.css">
 </head>
@@ -19,7 +19,7 @@
                 <i class="ti-apple"><a href="#">Authorised</a></i>
                 <i class="ti-mobile"><a href="">19006626</a></i>
                 <i class="ti-location-pin"><a href="">Địa chỉ</a></i>
-                <a href="#"><i class="ti-bag js" style="font-size: 24px; margin-left: 12px;">
+                <a class="bag"><i class="ti-bag js" style="font-size: 24px; margin-left: 12px; cursor: pointer;">
                 </i></a>
             </div>
             <div class="clear"></div>   
@@ -116,7 +116,7 @@
                         <li><a href="">Bán hàng không lợi nhuận</a></li>                       
                     </ul>
                 </li>
-                <li><a href="./traGop.html">Trả góp</a></li>
+                <li><a href="./tinTuc.html">Tin tức</a></li>
                 <li><input type="text" name="" id="search" placeholder="Bạn muốn mua gì?"><button type="submit" id="search-btn"><i class="fas fa-search"></i></button></li>
             </ul>
     <div class="clear"></div>
@@ -216,17 +216,28 @@
             <br>Điện thoại: 0247.305.9999. <br>Email: lienhe@shopdunk.com. <br>Đại diện pháp luật: PHẠM MẠNH HÒA</p>
         </div>
     </div>
-    <script>
-        window.onscroll = function() {myFunction()};
-        var navH = document.getElementById("nav-bar");
-        var fixed = navH.offsetTop;
-        function myFunction(){
-            if(window.pageYOffset>fixed){
-                navH.classList.add("fixed");
-            }else{
-                navH.classList.remove("fixed");
-            }
-        }
-    </script>
+    <div class="modal">
+        <div class="sub-modal">
+            <div class="content-modal">
+                <a href=""><i class="ti-close"></i></a><hr>
+                <div class="listGioHang">
+                    <div class="product">
+                        <p>iPhone13 Pro Max <button style="margin-left: 30px;">xoa</button>  </p>                                         
+                    </div>
+                    <div class="product">
+                        <p>iPhone13 Pro ffff Max <button style="margin-left: 30px;">xoa</button>  </p>                                         
+                    </div>
+                    
+                </div>  
+                <div class="clear"></div>              
+                <hr>
+               
+                <a href="./gioHang.html"><button class="btn_thanhToan">Xem giỏ hàng</button></a>
+               <a href="./thanhToan.html"> <button class="btn_thanhToan">Thanh toán</button></a>
+            </div>
+            
+        </div>
+    </div> 
+    <script src="./Javascript/showGioHang.js"></script>
 </body>
 </html>

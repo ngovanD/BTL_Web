@@ -21,6 +21,9 @@ namespace BTL.Models
         [StringLength(100)]
         public string TenLoaiSanPham { get; set; }
 
+        [StringLength(30)]
+        public string HinhAnh { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SanPham> SanPhams { get; set; }
     }

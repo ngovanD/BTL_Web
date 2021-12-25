@@ -1,0 +1,48 @@
+﻿@model BTL.Models.LoaiSanPham
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+
+<h3>Bạn có chắc chắn muốn xóa?</h3>
+<div>
+    <hr />
+    <table style="border:medium">
+        <tr>
+            <th>Tên loại sản phẩm</th>
+        </tr>
+        <tr>
+            <td> @Html.DisplayFor(model => model.TenLoaiSanPham)</td>
+        </tr>
+        <tr>
+            <th>Hình ảnh</th>
+        </tr>
+        <tr>
+            <td>
+                @{
+                    string ImagePath = "~/wwwroot/images/" + Model.HinhAnh;
+                }
+                <img src="@Url.Content(ImagePath)" width="100" class="img-thumbnail" />
+                <br />
+                @Html.DisplayFor(model => model.HinhAnh)
+            </td>
+        </tr>
+    </table>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Xóa" style="border-radius:8px" /> |
+            @Html.ActionLink("Quay lại", "Index")
+        </div>
+    }
+</div>
+@if (ViewBag.Error != null)
+{
+    <br />
+    <div class="alert alert-danger" role="alert">@ViewBag.Error</div>
+}

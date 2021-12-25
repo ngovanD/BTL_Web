@@ -111,15 +111,16 @@ z-index: 1;
     margin-left: -1px;
 }
 
-/*#content{*/
+#content{
     /* margin-top: 142px; */    
-    /*padding-top: 40%;
+    padding-top: 40%;
 background: url(./images/download.jpg) top center/cover no-repeat;
-}*/
-/*#content_1{
+}
+#content_1{
+    padding-top: 40%;
     background: url(./images/apple-fall-event-2021.jpeg) top center/cover no-repeat;
-}*/
-/*#content_2{
+}
+#content_2{
     padding-top: 40%;
     background: url(./images/collage.jpg) top center/cover no-repeat;
 }
@@ -130,8 +131,7 @@ background: url(./images/download.jpg) top center/cover no-repeat;
 #content_4{
     padding-top: 40%;
     background: url(./images/san-pham-cua-apple-2021-hinh1_800x450.jpg) top center/cover no-repeat;
-}*/
-
+}
 #list-sanPham{
     margin-top: 60px;
     width: 100%;
@@ -313,6 +313,7 @@ text-align: center;
 line-height: 1.6;
 font-size: 14px;
 }
+
 .modal{
     position: fixed;
     top: 0;
@@ -349,4 +350,24 @@ font-size: 14px;
 } */
 .modal.open{
     display: flex;
+}
+.modal .btn_thanhToan{
+    padding: 10px 35px;
+    margin-right: 20px;
+    margin-top: 20px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background:#818A91;
+    color: #fff;
+}
+.modal .listGioHang{
+   
+    width: 100%;
+}
+.modal .product{
+    margin:10px 20px;
+    float: left;
+    
+
 }

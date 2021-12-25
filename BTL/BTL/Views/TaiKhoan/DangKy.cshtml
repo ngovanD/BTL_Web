@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewBag.Title = "DangKy";
+    Layout = "~/Views/Shared/_LayoutClient.cshtml";
+}
+
+<form action="/TaiKhoan/DangKy" method="post" id="formDannNhap">
+
+    <table style="width: 800px;" cellspacing="30" cellpadding="10">
+        <tr>
+            <th colspan="2" style="font-size: 36px;">Đăng ký tài khoản</th>
+        </tr>
+        <tr>
+            <th colspan="2" style="font-size: 12px; color: red;">@ViewBag.TrangThai</th>
+        </tr>
+        <tr>
+            <td>Địa chỉ Email:</td>
+            <td><input type="text" name="Email" id="" class="text-dki"></td>
+        </tr>
+        <tr>
+            <td>Họ và tên:</td>
+            <td><input type="text" name="HoTen" id="" class="text-dki"></td>
+        </tr>
+        <tr>
+            <td>Mật khẩu:</td>
+            <td><input type="password" name="MatKhau" id="" class="text-dki"></td>
+        </tr>
+        <tr>
+            <td>Xác nhận mật khẩu:</td>
+            <td><input type="password" name="MatKhauXacNhan" id="" class="text-dki"></td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: center;" class="but_submit">
+                <input type="submit" name="name" value="Đăng ký" style="width: 200px; height: 50px; font-size: 24px;
+                        border:  none; border-radius: 10px; padding: 15px 20px; text-decoration: none; color: #fff;" />
+                @*<a href="#"
+                style="width: 200px; height: 50px; font-size: 24px;
+                     border:  none; border-radius: 10px; padding: 15px 20px; text-decoration: none; color: #fff;">Đăng ký</a>*@
+            </td>
+        </tr>
+
+    </table>
+</form>
+

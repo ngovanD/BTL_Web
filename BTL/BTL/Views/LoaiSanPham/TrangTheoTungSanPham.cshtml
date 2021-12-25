@@ -1,0 +1,61 @@
+﻿@using BTL.Models
+@using PagedList.Mvc;
+
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "TrangTheoTungSanPham";
+    Layout = "~/Views/Shared/_LayoutClient.cshtml";
+}
+
+@{
+    var loaiSanPham = ViewBag.loaiSanPham as LoaiSanPham;
+    var listSanPhamTheoLoai = ViewBag.listSanPhamTheoLoai as PagedList.IPagedList<BTL.Models.SanPhamDto>;
+}
+
+<div class="content">
+    <h1 style="text-align: center; padding: 20px 0px;">@loaiSanPham.TenLoaiSanPham</h1>
+    @*<div class="timKiemGia" style="float: right; margin-right: 10%;">
+        <form action="@Url.Action("TrangTheoTungSanPham", 
+                     new { maLoaiSanPham = loaiSanPham.MaLoaiSanPham, currentFilter1 = ViewBag.CurrentFilter1, currentFilter2 = ViewBag.CurrentFilter2, page = 1 })" 
+              method="post">
+            Chọn khoảng giá: <input type="text" name="Gia1" id="search" placeholder="0" style="" value="@ViewBag.CurrentFilter1"> --
+            <input type="text" name="giaLon" id="Gia2" placeholder="0" style="width: 100px;" value="@ViewBag.CurrentFilter2">
+            <button type="submit" id="search-btn" style="border-radius: 5px; padding:2px 8px; cursor: pointer;">Lọc</button>
+        </form>
+    </div>*@
+
+    <div class="timKiemGia" style="float: right; margin-right: 10%;">
+        @using (Html.BeginForm())
+        {
+            <p>
+                Tìm theo khoảng giá:
+                @Html.TextBox("Gia1", ViewBag.CurrentFilter1 as string, new { style= "width: 100px;" })
+                -
+                @Html.TextBox("Gia2", ViewBag.CurrentFilter2 as string, new { style = "width: 100px;"})
+                <input type="submit" name="ButtonSearch" id="search-btn" style="border-radius: 5px; padding:2px 8px; cursor: pointer;" value="Lọc" />
+            </p>
+        }
+    </div>
+
+    
+
+    <div id="list-sanPham">
+        @foreach (var item in listSanPhamTheoLoai)
+        {
+            <div class="sanPham">
+                <a href="@Url.Action("ChiTietSanPham", "SanPham", new { maSanPham = item.MaSanPham})"><img src="~/wwwroot/images/sanpham/@item.HinhAnh" alt="iPhone" class="sanPham-img sanPham-km-img"></a>
+                <a href="@Url.Action("ChiTietSanPham", "SanPham", new { maSanPham = item.MaSanPham})" class="text-sanPham" style="left: 80px;">@item.TenSanPham</a>
+                <p class="giaSanPham">Giá từ:@item.Gia ₫</p>
+            </div>
+        }
+        <div class="clear"></div>
+    </div>
+</div>
+
+<br />
+<div align="center">
+    Trang @(listSanPhamTheoLoai.PageCount < listSanPhamTheoLoai.PageNumber ? 0 : listSanPhamTheoLoai.PageNumber) / @listSanPhamTheoLoai.PageCount
+    @Html.PagedListPager(listSanPhamTheoLoai, page => Url.Action("TrangTheoTungSanPham", 
+    new { maLoaiSanPham = loaiSanPham.MaLoaiSanPham, currentFilter1 = ViewBag.CurrentFilter1, currentFilter2 = ViewBag.CurrentFilter2, page }))
+</div>

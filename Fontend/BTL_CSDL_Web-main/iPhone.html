@@ -19,7 +19,7 @@
                 <i class="ti-apple"><a href="#">Authorised</a></i>
                 <i class="ti-mobile"><a href="">19006626</a></i>
                 <i class="ti-location-pin"><a href="">Địa chỉ</a></i>
-                <a href="#"><i class="ti-bag js" style="font-size: 24px; margin-left: 12px;">
+                <a class="bag"><i class="ti-bag js" style="font-size: 24px; margin-left: 12px; cursor: pointer;">
                 </i></a>
             </div>
             <div class="clear"></div>   
@@ -116,16 +116,24 @@
                         <li><a href="">Bán hàng không lợi nhuận</a></li>                       
                     </ul>
                 </li>
-                <li><a href="./traGop.html">Trả góp</a></li>
+                <li><a href="./tinTuc.html">Tin tức</a></li>
                 <li><input type="text" name="" id="search" placeholder="Bạn muốn mua gì?"><button type="submit" id="search-btn"><i class="fas fa-search"></i></button></li>
             </ul>
     <div class="clear"></div>
         </div>        
         <div class="content">
             <h1 style="text-align: center; padding: 20px 0px;">iPhone</h1>
+            <div class="timKiemGia" style="float: right; margin-right: 10%;">
+                <form action="" method="get">
+                    Chọn khoảng giá: <input type="text" name="" id="search" placeholder="0"  style="width: 100px;"> --
+                    <input type="text" name="" id="search" placeholder="0" style="width: 100px;">
+                    <button type="submit" id="search-btn" style="border-radius: 5px; padding:2px 8px; cursor: pointer;">Lọc</button>
+                </form>
+            </div>
+            
             <div id="list-sanPham">
                 <div class="sanPham">
-                    <a href=""><img src="./images/iphone-13-pro-max-blue-select-254x300.png" alt="iPhone" class="sanPham-img"></a>
+                    <a href="./chiTietSanPham.html"><img src="./images/iphone-13-pro-max-blue-select-254x300.png" alt="iPhone" class="sanPham-img"></a>
                     <a href="" class="text-sanPham"  style="left: 80px;">iPhone 13 Pro Max</a>
                     <p class="giaSanPham">Giá từ:32.750.000 ₫ – 46.450.000 ₫</p>
                 </div>
@@ -216,17 +224,29 @@
             <br>Điện thoại: 0247.305.9999. <br>Email: lienhe@shopdunk.com. <br>Đại diện pháp luật: PHẠM MẠNH HÒA</p>
         </div>
     </div>
-    <script>
-        window.onscroll = function() {myFunction()};
-        var navH = document.getElementById("nav-bar");
-        var fixed = navH.offsetTop;
-        function myFunction(){
-            if(window.pageYOffset>fixed){
-                navH.classList.add("fixed");
-            }else{
-                navH.classList.remove("fixed");
-            }
-        }
+    <div class="modal">
+        <div class="sub-modal">
+            <div class="content-modal">
+                <a href=""><i class="ti-close"></i></a><hr>
+                <div class="listGioHang">
+                    <div class="product">
+                        <p>iPhone13 Pro Max <button style="margin-left: 30px;">xoa</button>  </p>                                         
+                    </div>
+                    <div class="product">
+                        <p>iPhone13 Pro ffff Max <button style="margin-left: 30px;">xoa</button>  </p>                                         
+                    </div>
+                    
+                </div>  
+                <div class="clear"></div>              
+                <hr>
+               
+                <a href="./gioHang.html"><button class="btn_thanhToan">Xem giỏ hàng</button></a>
+               <a href="./thanhToan.html"> <button class="btn_thanhToan">Thanh toán</button></a>
+            </div>
+            
+        </div>
+    </div>   
+    <script src="./Javascript/showGioHang.js">        
     </script>
 </body>
 </html>

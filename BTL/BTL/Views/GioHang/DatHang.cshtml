@@ -1,0 +1,74 @@
+﻿@using BTL.Models
+@{
+    ViewBag.Title = "DatHang";
+    Layout = "~/Views/Shared/_LayoutClient.cshtml";
+}
+
+@{
+    var gioHang = Session["GioHang"] as List<GioHang>;
+}
+<div class="content">
+    <h1 style="text-align: center; padding: 20px 0px;">Thanh toán</h1>
+    <table border="2" style="width: 100%; text-align: center;">
+        <tr>
+            <th></th>
+            <th></th>
+            <th>Sản phẩm</th>
+            <th>Đơn Giá</th>
+            <th>Số lượng</th>
+            <th>Tạm tính</th>
+        </tr>
+        @foreach (var item in gioHang)
+        {
+            <tr>
+                <td> <a href="@Url.Action("XoaSanPham", "GioHang", new { item.MaSanPham, item.Id_MauSac, item.Id_DungLuong })"><i class="ti-close"></i></a></td>
+                <td><img src="~/wwwroot/images/sanpham/@item.HinhAnh" alt="" style="width: 100px; height: 100px;"></td>
+                <td>@item.TenSanPham</td>
+                <td>@item.Gia</td>
+                <td><input type="number" name="" id="" min="1" value="@item.SoLuong"></td>
+                <td>@item.ThanhTien</td>
+            </tr>
+        }
+        <td colspan="6">
+            <input type="text" name="" id="" placeholder="Mã giảm giá" style="font-size: 16px;width: 300px; padding: 5px;">
+            <button style="padding: 10px 30px; margin: 10px 10px; font-size: 16px; background: #000; color: #fff; border: none; border-radius: 10px; font-weight: bold; cursor: pointer;">Áp dụng</button></a>
+        </td>
+        </tr>
+        <tr>
+            <td colspan="6" style="padding: 20px;">Số tiền phải thanh toán: @ViewBag.TongTien</td>
+        </tr>
+    </table>
+    <form action="/GioHang/DatHang " method="post">
+        <table style="width: 800px;" cellspacing="30" cellpadding="10">
+            <tr>
+                <th colspan="2" style="font-size: 24px;">Thông tin thanh toán</th>
+            </tr>
+            <tr>
+                <td>Họ và tên:</td>
+                <td><input type="text" name="HoTen" id="" class="text-dki"></td>
+            </tr>
+            <tr>
+                <td>Địa chỉ:</td>
+                <td><input type="text" name="DiaChi" id="" class="text-dki"></td>
+            </tr>
+
+            <tr>
+                <td>Số điện thoại:</td>
+                <td><input type="text" name="SoDienThoai" id="" class="text-dki"></td>
+            </tr>
+            <tr>
+                <td>Ghi chú:</td>
+                <td><input type="text" name="GhiChu" id="" class="text-dki"></td>
+            </tr>
+
+            <tr>
+                <td colspan="2" style="text-align: center;" class="but_submit">
+                    <input type="submit" value="Đặt hàng"
+                           style="width: 200px; height: 50px;font-size: 24px;border:  none; border-radius: 10px; padding: 15px 20px;
+                          text-decoration: none; color: #fff; background-color: #0099FF; cursor: pointer;">
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+

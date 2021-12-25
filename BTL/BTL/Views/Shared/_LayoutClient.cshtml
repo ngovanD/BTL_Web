@@ -1,12 +1,21 @@
-﻿<!DOCTYPE html>
+﻿@using BTL.Models
+
+@{
+    var listLoaiSanPham = ViewBag.listLoaiSanPham;
+    var taiKhoan = Session["taiKhoan"] as TaiKhoan;
+    var gioHang = Session["GioHang"] as List<GioHang>;
+}
+
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
 
     @*<meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")*@
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>@ViewBag.Title - My ASP.NET Application</title>
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")*@
 
 
     <meta charset="UTF-8">
@@ -14,6 +23,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="~/wwwroot/CSS/style.css">
+    <link rel="stylesheet" href="~/wwwroot/CSS/styleDangNhap.css">
+    <link rel="stylesheet" href="~/wwwroot/CSS/style_chiTietSanPham.css">
     <link rel="stylesheet" href="~/wwwroot/themify-icons/themify-icons.css">
     <link rel="stylesheet" href="~/wwwroot/fontawesome-free-5.15.4-web/css/all.css">
 </head>
@@ -31,7 +42,19 @@
                     <i class="ti-bag js" style="font-size: 24px; margin-left: 12px;">
                     </i>
                 </a>
-                <a href="./formDangNhap.html" style="font-size: 13px;"><i class="fas fa-sign-in-alt" style="font-size: 24px; margin-right: 10px;"></i>Đăng nhập</a>
+                @if (taiKhoan != null)
+                {
+                    <a href="@Url.Action("DangXuat", "TaiKhoan") " style="font-size: 13px;">
+                        <i class="fas fa-sign-in-alt" style="font-size: 24px; margin-right: 10px;"></i>@taiKhoan.HoTen
+                    </a>
+                }
+                else
+                {
+                    <a href="@Url.Action("DangNhap", "TaiKhoan") " style="font-size: 13px;">
+                        <i class="fas fa-sign-in-alt" style="font-size: 24px; margin-right: 10px;"></i>Đăng nhập
+                    </a>
+                }
+
             </div>
             <div class="clear"></div>
             <ul class="nav" id="nav-bar">
@@ -140,8 +163,60 @@
             </ul>
 
         </div>
-
         @RenderBody()
+
+        <div id="introduce">
+            <img src="~/wwwroot/images/logo-black-p9zi6fzjztstkzq7o44ox4rx3byzw3ztdhy6dfyb8i.jpeg" alt="logo" class="intro-img">
+            <p class="text-intro">Là chuỗi siêu thị được thành lập từ 2010 tại Hà Nội, sau đó tái cấu trúc vào 2016 và thuộc quyền sở hữu của công ty Hesman, ShopDunk chính thức trở thành đại lý ủy quyền Apple (Apple Authorized Reseller) từ tháng 9/2020. Với kinh nghiệm và đam mê sản phẩm Apple chúng tôi mong muốn đem trải nghiệm tốt nhất về sản phẩm và dịch vụ của Apple tới toàn bộ người dùng tại Việt Nam.</p>
+        </div>
+        <div id="service">
+            <div class="text-service">
+                <p>Thông tin</p>
+                <ul>
+                    <li><a href="">Giới thiệu</a></li>
+                    <li><a href="">Khuyến mại</a></li>
+                    <li><a href="">Tuyển dụng</a></li>
+                    <li><a href="">Hệ thống cửa hàng</a></li>
+                    <li><a href="">Blog ShopDunk</a></li>
+                </ul>
+            </div>
+            <div class="text-service">
+                <p>Chính sách</p>
+                <ul>
+                    <li><a href="">Chính sách đổi trả</a></li>
+                    <li><a href="">Chính sách bảo mật</a></li>
+                    <li><a href="">Chính sách hoạt động chung</a></li>
+                    <li><a href="">Chính sách trả góp</a></li>
+                    <li><a href="">Chính sách bảo hành</a></li>
+                    <li><a href="">Chính sách Ship - COD</a></li>
+                    <li><a href="">Hướng dẫn mua hàng</a></li>
+                    <li><a href="">Hướng dẫn Check IMEI</a></li>
+                </ul>
+            </div>
+            <div class="text-service">
+                <p>Liên hệ</p>
+                <ul>
+                    <li>Gọi tư vấn mua hàng: <a href="" style="font-weight: bold;">1900.6626</a></li>
+                    <li>Gọi khiếu nại: <a href="" style="font-weight: bold;">0886.308.688</a></li>
+                    <li>Dành cho Doanh nghiệp & Đối tác: <a href="" style="font-weight: bold;">0972.927.907</a></li>
+
+                </ul>
+            </div>
+            <div class="register-service">
+                <a href=""><img src="~/wwwroot/images/bocongthuong@2x-paqabmyksq4df3tgvdpemfeznx0o7oq3w3pneorlci.png" alt="Bo Cong Thuong"></a>
+                <div class="register-icons">
+                    <i class="fab fa-cc-mastercard"></i>
+                    <i class="fab fa-cc-visa"></i>
+                    <i class="fas fa-hand-holding-usd"></i>
+                    <i class="fas fa-money-check-alt"></i>
+                </div>
+                <h2>Đăng ký nhận thông tin từ ShopDunk</h2>
+                <p style="font-size: 12px; margin: 8px 0px;">Nhận thông tin sản phẩm mới và chương trình khuyến mại của ShopDunk</p>
+                <input type="email" name="" id="" class="register-email" placeholder="Nhập email của bạn...">
+                <button type="submit" class="register-btn"><i class="fas fa-paper-plane"></i> Đăng ký</button>
+            </div>
+            <div class="clear"></div>
+        </div>
         <div id="footer">
             <p>
                 © 2016 Công ty CP HESMAN Việt Nam<br><br>Giấy chứng nhận ĐKDN số 0107465657 do Sở kế hoạch và đầu tư thành phố Hà Nội cấp ngày 08 tháng 06 năm 2016. Địa chỉ: Số 76 Thái Hà, Phường Trung Liệt, Quận Đống Đa, Thành phố Hà Nội, Việt Nam
@@ -149,14 +224,35 @@
             </p>
         </div>
     </div>
+
+
     <div class="modal">
         <div class="sub-modal">
             <div class="content-modal">
-                <a href=""><i class="ti-close"></i></a>
+                <a href=""><i class="ti-close"></i></a><hr>
+                    <div class="listGioHang">
+                        @if (gioHang != null)
+                        {
+                            foreach (var item in gioHang)
+                            {
+                                <div class="product">
+                                    <p>@item.TenSanPham<a style="margin-left: 30px;">xoa</a>  </p>
+                                </div>
+                            }
+                            <br />
+                            <div>Tổng tiền: @ViewBag.TongTien VND</div>
+                        }
+                    </div>
+                <div class="clear"></div>
+                <hr>
+
+                <a href="/GioHang/GioHang"><button class="btn_thanhToan">Xem giỏ hàng</button></a>
+                <a href="/GioHang/DatHang"> <button class="btn_thanhToan">Thanh toán</button></a>
             </div>
 
         </div>
     </div>
+
     <script>
         window.onscroll = function () { myFunction() };
         var navH = document.getElementById("nav-bar");
@@ -184,24 +280,7 @@
             setTimeout(changeImg, 1000);
         }
     </script>
-    <script>
-        const buybtn = document.querySelector('.bag')
-        const modal = document.querySelector('.modal')
-        const modalClose = document.querySelector('.ti-close')
-        const modalSub = document.querySelector('.sub-modal')
-        function showBuy() {
-            modal.classList.add('open')
-        }
-        function hideBuy() {
-            modal.classList.remove('open')
-        }
-        buybtn.addEventListener('click', showBuy)
-        modalClose.addEventListener('click', hideBuy)
-        modal.addEventListener('click', hideBuy)
-        modalSub.addEventListener('click', function (event) {
-            event.stopPropagation()
-        })
-    </script>
+    <script src="~/wwwroot/Javascript/showGioHang.js"></script>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

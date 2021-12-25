@@ -19,7 +19,7 @@
                 <i class="ti-apple"><a href="#">Authorised</a></i>
                 <i class="ti-mobile"><a href="">19006626</a></i>
                 <i class="ti-location-pin"><a href="">Địa chỉ</a></i>
-                <a class="bag"><i class="ti-bag js" style="font-size: 24px; margin-left: 12px;">
+                <a class="bag"><i class="ti-bag js" style="font-size: 24px; margin-left: 12px; cursor: pointer;">
                 </i></a>
                 <a href="./formDangNhap.html" style="font-size: 13px;"><i class="fas fa-sign-in-alt" style="font-size: 24px; margin-right: 10px;"></i>Đăng nhập</a>
             </div>
@@ -28,7 +28,7 @@
                 <li><a href="#"><img src="./images/263526478_596871234858714_4622490846793397128_n.png" alt=""></a></li>
                 <li><a href="./iPhone.html">iPhone</a>
                     <ul class="nav-iPhone">
-                        <li><a href="#">iPhone 13 Pro Max</a></li>
+                        <li><a href="./chiTietSanPham.html">iPhone 13 Pro Max</a></li>
                         <li><a href="#">iPhone 13 Pro</a></li>
                         <li><a href="#">iPhone 13</a></li>
                         <li><a href="#">iPhone 13 mini</a></li>
@@ -117,10 +117,9 @@
                         <li><a href="">Bán hàng không lợi nhuận</a></li>                       
                     </ul>
                 </li>
-                <li><a href="./traGop.html">Trả góp</a></li>
-                <li><input type="text" name="" id="search" placeholder="Bạn muốn mua gì?"><button type="submit" id="search-btn"><i class="fas fa-search"></i></button></li>
-            </ul>
-    
+                <li><a href="./tinTuc.html">Tin tức</a></li>
+                <li><input type="text" name="" id="search" placeholder="Bạn muốn mua gì?"><button type="submit" id="search-btn" style="cursor: pointer;"><i class="fas fa-search"></i></button></li>
+            </ul>    
         </div>
         <div id="content" class="slideShow">
             
@@ -259,7 +258,7 @@
                 <h2>Đăng ký nhận thông tin từ ShopDunk</h2>
                 <p style="font-size: 12px; margin: 8px 0px;">Nhận thông tin sản phẩm mới và chương trình khuyến mại của ShopDunk</p>
                 <input type="email" name="" id="" class="register-email" placeholder="Nhập email của bạn...">
-                <button type="submit" class="register-btn"><i class="fas fa-paper-plane"></i> Đăng ký</button>
+                <button style="cursor: pointer;" type="submit" class="register-btn"><i class="fas fa-paper-plane"></i> Đăng ký</button>
             </div>
             <div class="clear"></div>
         </div>
@@ -271,23 +270,25 @@
     <div class="modal">
         <div class="sub-modal">
             <div class="content-modal">
-                <a href=""><i class="ti-close"></i></a>
+                <a href=""><i class="ti-close"></i></a><hr>
+                <div class="listGioHang">
+                    <div class="product">
+                        <p>iPhone13 Pro Max <button style="margin-left: 30px;">xoa</button>  </p>                                         
+                    </div>
+                    <div class="product">
+                        <p>iPhone13 Pro ffff Max <button style="margin-left: 30px;">xoa</button>  </p>                                         
+                    </div>
+                    
+                </div>  
+                <div class="clear"></div>              
+                <hr>
+               
+                <a href="./gioHang.html"><button class="btn_thanhToan">Xem giỏ hàng</button></a>
+               <a href="./thanhToan.html"> <button class="btn_thanhToan">Thanh toán</button></a>
             </div>
             
         </div>
-    </div>
-    <script>
-        window.onscroll = function() {myFunction()};
-        var navH = document.getElementById("nav-bar");
-        var fixed = navH.offsetTop;
-        function myFunction(){
-            if(window.pageYOffset>fixed){
-                navH.classList.add("fixed");
-            }else{
-                navH.classList.remove("fixed");
-            }
-        }
-    </script>
+    </div>    
     <script>
       var index = 0;
       changeImg();
@@ -303,23 +304,7 @@
           setTimeout(changeImg,1000);
       }   
     </script>
-    <script>
-        const buybtn = document.querySelector('.bag')
-        const modal = document.querySelector('.modal')
-        const modalClose = document.querySelector('.ti-close')
-        const modalSub = document.querySelector('.sub-modal')
-        function showBuy(){
-                modal.classList.add('open')
-        }
-        function hideBuy(){
-                modal.classList.remove('open')
-        }
-        buybtn.addEventListener('click',showBuy)
-        modalClose.addEventListener('click',hideBuy)
-        modal.addEventListener('click',hideBuy)
-        modalSub.addEventListener('click', function (event) {
-            event.stopPropagation()
-        })
-    </script>
+    <script src="./Javascript/showGioHang.js"></script>
+    
 </body>
 </html>

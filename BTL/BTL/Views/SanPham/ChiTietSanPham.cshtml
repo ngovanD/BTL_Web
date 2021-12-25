@@ -1,0 +1,55 @@
+﻿@using BTL.Models
+@{
+    ViewBag.Title = "ChiTietSanPham";
+    Layout = "~/Views/Shared/_LayoutClient.cshtml";
+}
+@{ 
+    var sanPham = ViewBag.sanPham as SanPhamDto;
+    var listMau = ViewBag.listMau as List<MauSac>;
+    var listDungLuong = ViewBag.listDungLuong as List<DungLuong>;
+}
+
+<div id="giaSanPham">
+    <div class="anhSanPham">
+        <img src="~/wwwroot/images/sanpham/@sanPham.HinhAnh" alt="iPhone">
+    </div>
+    <div class="thongTinSanPham">
+        <h2>@sanPham.TenSanPham</h2>
+        <ul class="mauSac">
+            @foreach (var item in listMau)
+            {
+                <li><button onclick="loadGia()" style="background: @item.TenMau">&nbsp;&nbsp;&nbsp;&nbsp;</button></li>
+            }
+        </ul>
+        <ul class="dungLuong">
+            @foreach (var item in listDungLuong)
+            {
+                <li><button onclick="loadGia()">@item.KichThuoc</button></li>
+            }
+        </ul>
+        <br>
+        <hr>
+        <p id="giaTien" style="font-size: 24px; font-weight: bold;">@sanPham.Gia VND</p>
+        <a href="@Url.Action("ThemGioHang", "GioHang", new {maSanPham = sanPham.MaSanPham, id_MauSac = sanPham.Id_MauSac, id_DungLuong = sanPham.Id_DungLuong, @strURL=Request.Url.ToString()})" class="muaHang">Thêm vào giỏ hàng</a>
+        <p style="font-weight: bold;">
+            Khuyến mãi: <br><br>
+            <ul style="font-size: 14px; line-height: 1.5;">
+                <li>Tặng ốp Clear Case chính hãng Apple (N/Y: 1.430.000đ) với giá 0đ </li>
+                <li>Tặng 1.000.000đ triệu khi mua kèm tai nghe AirPods 2/ AirPods Pro (2021)</li>
+                <li>
+                    Tặng 1.000.000đ triệu khi mua kèm ốp chính hãng Apple <br>(Silicone Case, Leather Case)(*Lưu ý: Khách hàng chỉ đc chọn 1 trong các chương trình trên,
+                    <br>Chương trình KM tính trên giá niêm yết, không áp dụng chung với KM khác)
+                </li>
+                <li>Trả góp 0% lãi suất thẻ tín dụng </li>
+            </ul>
+        </p>
+    </div>
+    <div class="clear"></div>
+
+    <div class="moTa">
+        <p>
+            @sanPham.MoTa
+        </p>
+    </div>
+</div>
+
