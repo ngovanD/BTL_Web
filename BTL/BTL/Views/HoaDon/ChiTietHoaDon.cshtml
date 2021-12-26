@@ -1,0 +1,73 @@
+﻿@using BTL.Models
+@{
+    ViewBag.Title = "ChiTietHoaDon";
+    Layout = "~/Views/Shared/_LayoutClient.cshtml";
+}
+
+@{ 
+    var thongTinKhachHang = ViewBag.thongTinLienHeKhachHang as ThongTinLienHe_KhachHang;
+    var thongTinHoaDon = ViewBag.hoaDon as HoaDon;
+    var listSanPham = ViewBag.listSanPham as List<SanPhamDto>;
+}
+
+
+<div class="content">
+    <h1 style="text-align: center; padding: 20px 0px;">Thông tin đơn hàng</h1>
+    <table style="width: 800px;" cellspacing="30" cellpadding="10">
+        <tr>
+            <td>Má hóa đơn:</td>
+            <td>@thongTinHoaDon.MaHoaDon</td>
+        </tr>
+        <tr>
+            <td>Ngày đặt:</td>
+            <td>@thongTinHoaDon.NgayLapHoaDon</td>
+        </tr>
+        <tr>
+            <td>Trạng thái: </td>
+            <td>@thongTinHoaDon.TrangThai</td>
+        </tr>
+        <tr>
+            <td>Tổng tiền(sau khuyến mại nếu có):</td>
+            <td>@thongTinHoaDon.TongTien</td>
+        </tr>
+        <tr>
+            <td>Họ tên khách hàng:</td>
+            <td>@thongTinKhachHang.HoTen</td>
+        </tr>
+        <tr>
+            <td>Số điện thoại:</td>
+            <td>@thongTinKhachHang.SoDienThoai</td>
+        </tr>
+        <tr>
+            <td>Địa chỉ giao:</td>
+            <td>@thongTinKhachHang.DiaChi</td>
+        </tr>
+        <tr>
+            <td>Ghi chú:</td>
+            <td>@thongTinKhachHang.GhiChu</td>
+        </tr>
+
+        <br /><br />
+    </table>
+    <table border="2" style="width: 100%; text-align: center;">
+        <tr>
+            <th>Hình ảnh</th>
+            <th>Sản phẩm</th>
+            <th>Đơn Giá</th>
+            <th>Số lượng</th>
+            <th>Tạm tính</th>
+        </tr>
+        @foreach (var item in listSanPham)
+        {
+            <tr>
+                <td><img src="~/wwwroot/images/sanpham/@item.HinhAnh" alt="" style="width: 100px; height: 100px;"></td>
+                <td>@item.TenSanPham - @item.TenMau - @item.KichThuoc</td>
+                <td>@item.Gia</td>
+                <td>@item.SoLuong</td>
+                <td>@item.ThanhTien</td>
+            </tr>
+        }
+    </table>
+</div>
+
+

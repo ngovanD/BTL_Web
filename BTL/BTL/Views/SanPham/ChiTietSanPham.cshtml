@@ -16,21 +16,42 @@
     <div class="thongTinSanPham">
         <h2>@sanPham.TenSanPham</h2>
         <ul class="mauSac">
+            Màu sắc:
             @foreach (var item in listMau)
             {
-                <li><button onclick="loadGia()" style="background: @item.TenMau">&nbsp;&nbsp;&nbsp;&nbsp;</button></li>
+                if (item.ID_MauSac == sanPham.Id_MauSac)
+                {
+                    <li><a href="@Url.Action("ChiTietSanPhamLuaChon", "SanPham", new { sanPham.MaSanPham, item.ID_MauSac, sanPham.Id_DungLuong})" style="background: @item.TenMau;border-radius: 50%;font-size: 28px;cursor: pointer; border: 2px solid black; text-decoration: none">&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                }
+                else
+                {
+                    <li><a href="@Url.Action("ChiTietSanPhamLuaChon", "SanPham", new { sanPham.MaSanPham, item.ID_MauSac, sanPham.Id_DungLuong})" style="background: @item.TenMau;border-radius: 50%;font-size: 28px;border: 2px solid whitesmoke;cursor: pointer; text-decoration: none">&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                }
             }
+
         </ul>
         <ul class="dungLuong">
+            Dung lượng:
             @foreach (var item in listDungLuong)
             {
-                <li><button onclick="loadGia()">@item.KichThuoc</button></li>
+                if (item.ID_DungLuong == sanPham.Id_DungLuong)
+                {
+                    <li><a href="@Url.Action("ChiTietSanPhamLuaChon", "SanPham", new { sanPham.MaSanPham, sanPham.Id_MauSac, item.ID_DungLuong})" style="border-radius: 5px; border: 2px solid black; font-size: 20px; padding: 5px 4px; cursor: pointer; background-color: silver; text-decoration: none">@item.KichThuoc</a></li>
+                }
+                else
+                {
+                    <li><a href="@Url.Action("ChiTietSanPhamLuaChon", "SanPham", new { sanPham.MaSanPham, sanPham.Id_MauSac, item.ID_DungLuong})" style="border-radius: 5px; border: 2px solid whitesmoke; font-size: 20px; padding: 5px 4px; cursor: pointer; background-color: silver; text-decoration: none ">@item.KichThuoc</a></li>
+                }
             }
         </ul>
         <br>
         <hr>
-        <p id="giaTien" style="font-size: 24px; font-weight: bold;">@sanPham.Gia VND</p>
+        <p id="giaTien" style="font-size: 24px; font-weight: bold;">Giá: @String.Format("{0:0,0}", sanPham.Gia) VND</p>
+        <br />
         <a href="@Url.Action("ThemGioHang", "GioHang", new {maSanPham = sanPham.MaSanPham, id_MauSac = sanPham.Id_MauSac, id_DungLuong = sanPham.Id_DungLuong, @strURL=Request.Url.ToString()})" class="muaHang">Thêm vào giỏ hàng</a>
+        <br />
+        <br />
+        <br />
         <p style="font-weight: bold;">
             Khuyến mãi: <br><br>
             <ul style="font-size: 14px; line-height: 1.5;">
@@ -42,14 +63,14 @@
                 </li>
                 <li>Trả góp 0% lãi suất thẻ tín dụng </li>
             </ul>
+            <br><br>
+        <p style="font-weight: bold;">
+            Mô tả: <p><br>
+            <ul style="font-size: 14px; line-height: 1.5;">
+                <li>@sanPham.MoTa</li>
+            </ul>
         </p>
     </div>
     <div class="clear"></div>
-
-    <div class="moTa">
-        <p>
-            @sanPham.MoTa
-        </p>
-    </div>
 </div>
 

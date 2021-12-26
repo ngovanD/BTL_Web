@@ -43,11 +43,12 @@
     <div id="list-sanPham">
         @foreach (var item in listSanPhamTheoLoai)
         {
-            <div class="sanPham">
-                <a href="@Url.Action("ChiTietSanPham", "SanPham", new { maSanPham = item.MaSanPham})"><img src="~/wwwroot/images/sanpham/@item.HinhAnh" alt="iPhone" class="sanPham-img sanPham-km-img"></a>
-                <a href="@Url.Action("ChiTietSanPham", "SanPham", new { maSanPham = item.MaSanPham})" class="text-sanPham" style="left: 80px;">@item.TenSanPham</a>
-                <p class="giaSanPham">Giá từ:@item.Gia ₫</p>
-            </div>
+        <div class="sanPham">
+            <a href="@Url.Action("ChiTietSanPham", "SanPham", new { maSanPham = item.MaSanPham})"><img src="~/wwwroot/images/sanpham/@item.HinhAnh" alt="iPhone" class="sanPham-img sanPham-km-img"></a>
+            <a href="@Url.Action("ChiTietSanPham", "SanPham", new { maSanPham = item.MaSanPham})" class="text-sanPham" style="width: 100%; left:0">@item.TenSanPham</a>
+            <p class="giaSanPham">Giá từ:@item.Gia ₫</p>
+
+        </div>
         }
         <div class="clear"></div>
     </div>
@@ -57,5 +58,5 @@
 <div align="center">
     Trang @(listSanPhamTheoLoai.PageCount < listSanPhamTheoLoai.PageNumber ? 0 : listSanPhamTheoLoai.PageNumber) / @listSanPhamTheoLoai.PageCount
     @Html.PagedListPager(listSanPhamTheoLoai, page => Url.Action("TrangTheoTungSanPham", 
-    new { maLoaiSanPham = loaiSanPham.MaLoaiSanPham, currentFilter1 = ViewBag.CurrentFilter1, currentFilter2 = ViewBag.CurrentFilter2, page }))
+    new { @maLoaiSanPham = loaiSanPham.MaLoaiSanPham, currentFilter1 = ViewBag.CurrentFilter1, currentFilter2 = ViewBag.CurrentFilter2, page }))
 </div>

@@ -37,7 +37,7 @@ namespace BTL.Controllers.User
         public ActionResult ThemGioHang(int maSanPham, int id_MauSac, int id_DungLuong, string strURL)
         {
             List<GioHang> lstGioHang = LayGioHang();
-            GioHang sanPham = lstGioHang.Find(n => n.MaSanPham == maSanPham);
+            GioHang sanPham = lstGioHang.Find(n => n.MaSanPham == maSanPham && n.Id_MauSac == id_MauSac && n.Id_DungLuong == id_DungLuong);
             if (sanPham == null)
             {
                 sanPham = new GioHang(maSanPham, id_MauSac, id_DungLuong);
@@ -47,15 +47,15 @@ namespace BTL.Controllers.User
             {
                 sanPham.SoLuong++;
             }
-            ViewBag.TongTien = TongTien();
+            ViewBag.TongTienGioHang = TongTien();
 
             return Redirect(strURL);
         }
 
-        public ActionResult XoaSanPham(int maSanPham, int id_MauSac, int id_DungLuong)
+        public ActionResult XoaSanPham(int maSanPham, int id_MauSac, int id_DungLuong, string strURL)
         {
             List<GioHang> lstGioHang = LayGioHang();
-            GioHang sanpham = lstGioHang.SingleOrDefault(n => n.MaSanPham == maSanPham);
+            GioHang sanpham = lstGioHang.SingleOrDefault(n => n.MaSanPham == maSanPham && n.Id_MauSac == id_MauSac && n.Id_DungLuong == id_DungLuong);
             if (sanpham != null)
             {
                 lstGioHang.RemoveAll(n => n.MaSanPham == maSanPham && n.Id_MauSac == id_MauSac && n.Id_DungLuong == id_DungLuong);
@@ -66,14 +66,14 @@ namespace BTL.Controllers.User
                 return RedirectToAction("Index", "Home");
             }
 
-            return RedirectToAction("GioHang");
+            return Redirect(strURL);
         }
 
 
         public ActionResult CapNhatGioHang(int maSanPham, int id_MauSac, int id_DungLuong, FormCollection f)
         {
             List<GioHang> lstGioHang = LayGioHang();
-            GioHang sanpham = lstGioHang.SingleOrDefault(n => n.MaSanPham == maSanPham);
+            GioHang sanpham = lstGioHang.SingleOrDefault(n => n.MaSanPham == maSanPham && n.Id_MauSac == id_MauSac && n.Id_DungLuong == id_DungLuong);
 
             if (sanpham != null)
             {

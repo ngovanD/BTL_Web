@@ -23,9 +23,9 @@
         @foreach (var item in gioHang)
         {
     <tr>
-        <td> <a href="@Url.Action("XoaSanPham", "GioHang", new { item.MaSanPham, item.Id_MauSac, item.Id_DungLuong })"><i class="ti-close"></i></a></td>
+        <td> <a href="@Url.Action("XoaSanPham", "GioHang", new { item.MaSanPham, item.Id_MauSac, item.Id_DungLuong,  @strURL=Request.Url.ToString()})"><i class="ti-close"></i></a></td>
         <td><img src="~/wwwroot/images/sanpham/@item.HinhAnh" alt="" style="width: 100px; height: 100px;"></td>
-        <td>@item.TenSanPham</td>
+        <td>@item.TenSanPham - @item.TenMau - @item.KichThuoc</td>
         <td>@item.Gia</td>
         @using (Html.BeginForm("CapNhatGioHang", "Giohang", new { item.MaSanPham, item.Id_MauSac, item.Id_DungLuong }))
         {

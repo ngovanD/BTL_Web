@@ -49,6 +49,8 @@ namespace BTL.Controllers
                 Gia1 = currentFilter1;
                 Gia2 = currentFilter2;
             }
+            ViewBag.currentFilter1 = Gia1;
+            ViewBag.currentFilter2 = Gia2;
 
             int gia1 = 0;
             int gia2 = 0;
@@ -64,7 +66,7 @@ namespace BTL.Controllers
             LoaiSanPham loaiSanPham = LayLoaiSanPham(maLoaiSanPham);
             ViewBag.loaiSanPham = loaiSanPham;
 
-            int pageSize = 3;
+            int pageSize = 6;
             int pageNumber = (page ?? 1);
             ViewBag.listSanPhamTheoLoai = list.ToPagedList(pageNumber, pageSize);
 

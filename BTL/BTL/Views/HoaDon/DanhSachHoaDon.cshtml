@@ -1,0 +1,33 @@
+﻿@using BTL.Models
+@{
+    ViewBag.Title = "DanhSachHoaDon";
+    Layout = "~/Views/Shared/_LayoutClient.cshtml";
+}
+@{ 
+    var listHoaDon = ViewBag.listHoaDon as List<HoaDon>;
+    int stt = 1;
+}
+
+<div class="content">
+    <h1 style="text-align: center; padding: 20px 0px;">Danh sách đơn hàng</h1>
+    <table border="2" style="width: 100%; text-align: center;">
+        <tr>
+            <th>STT</th>
+            <th>Mã đơn hàng</th>
+            <th>Tổng tiền</th>
+            <th>Trạng thái</th>
+            <th>Chi tiết</th>
+        </tr>
+        @for (int i = 1; i <= listHoaDon.Count; i++)
+        {
+            <tr>
+                <td>@i</td>
+                <td>@listHoaDon.ElementAt(i-1).MaHoaDon</td>
+                <td>@listHoaDon.ElementAt(i-1).TongTien</td>
+                <td>@listHoaDon.ElementAt(i-1).TrangThai</td>
+                <td><a href="@Url.Action("ChiTietHoaDon", "HoaDon", new { @listHoaDon.ElementAt(i-1).MaHoaDon})">Chi tiết</a></td>
+            </tr>
+        }
+    </table>
+</div>
+

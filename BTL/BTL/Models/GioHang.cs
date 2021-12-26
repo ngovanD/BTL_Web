@@ -55,7 +55,6 @@ namespace BTL.Models
 
             gia = (int)spmd.Gia;
             soLuong = 1;
-
         }
     }
 }

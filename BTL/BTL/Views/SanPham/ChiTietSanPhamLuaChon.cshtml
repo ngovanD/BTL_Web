@@ -1,0 +1,78 @@
+﻿@using BTL.Models
+@{
+    ViewBag.Title = "ChiTietSanPham";
+    Layout = "~/Views/Shared/_LayoutClient.cshtml";
+}
+@{
+    var sanPham = ViewBag.sanPham as SanPhamDto;
+    var listMau = ViewBag.listMau as List<MauSac>;
+    var listDungLuong = ViewBag.listDungLuong as List<DungLuong>;
+}
+
+<div id="giaSanPham">
+    <div class="anhSanPham">
+        <img src="~/wwwroot/images/sanpham/@sanPham.HinhAnh" alt="iPhone">
+    </div>
+    <div class="thongTinSanPham">
+        <h2>@sanPham.TenSanPham</h2>
+        <ul class="mauSac">
+            Màu sắc:
+            @foreach (var item in listMau)
+            {
+                if (item.ID_MauSac == sanPham.Id_MauSac)
+                {
+                    <li><a href="@Url.Action("ChiTietSanPhamLuaChon", "SanPham", new { sanPham.MaSanPham, item.ID_MauSac, sanPham.Id_DungLuong})" style="background: @item.TenMau;border-radius: 50%;font-size: 28px;cursor: pointer; border: 2px solid black; text-decoration: none">&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                }
+                else
+                {
+                    <li><a href="@Url.Action("ChiTietSanPhamLuaChon", "SanPham", new { sanPham.MaSanPham, item.ID_MauSac, sanPham.Id_DungLuong})" style="background: @item.TenMau;border-radius: 50%;font-size: 28px;border: 2px solid whitesmoke;cursor: pointer; text-decoration: none">&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+                }
+            }
+
+        </ul>
+        <ul class="dungLuong">
+            Dung lượng:
+            @foreach (var item in listDungLuong)
+            {
+                if (item.ID_DungLuong == sanPham.Id_DungLuong)
+                {
+                    <li><a href="@Url.Action("ChiTietSanPhamLuaChon", "SanPham", new { sanPham.MaSanPham, sanPham.Id_MauSac, item.ID_DungLuong})" style="border-radius: 5px; border: 2px solid black; font-size: 20px; padding: 5px 4px; cursor: pointer; background-color: silver; text-decoration: none">@item.KichThuoc</a></li>
+                }
+                else
+                {
+                    <li><a href="@Url.Action("ChiTietSanPhamLuaChon", "SanPham", new { sanPham.MaSanPham, sanPham.Id_MauSac, item.ID_DungLuong})" style="border-radius: 5px; border: 2px solid whitesmoke; font-size: 20px; padding: 5px 4px; cursor: pointer; background-color: silver; text-decoration: none ">@item.KichThuoc</a></li>
+                }
+            }
+        </ul>
+        <br>
+        <hr>
+        <p id="giaTien" style="font-size: 24px; font-weight: bold;">Giá: @String.Format("{0:0,0}", sanPham.Gia) VND</p>
+        <br />
+        <a href="@Url.Action("ThemGioHang", "GioHang", new {maSanPham = sanPham.MaSanPham, id_MauSac = sanPham.Id_MauSac, id_DungLuong = sanPham.Id_DungLuong, @strURL=Request.Url.ToString()})" class="muaHang">Thêm vào giỏ hàng</a>
+        <br />
+        <br />
+        <br />
+        <p style="font-weight: bold;">
+            Khuyến mãi: <br><br>
+            <ul style="font-size: 14px; line-height: 1.5;">
+                <li>Tặng ốp Clear Case chính hãng Apple (N/Y: 1.430.000đ) với giá 0đ </li>
+                <li>Tặng 1.000.000đ triệu khi mua kèm tai nghe AirPods 2/ AirPods Pro (2021)</li>
+                <li>
+                    Tặng 1.000.000đ triệu khi mua kèm ốp chính hãng Apple <br>(Silicone Case, Leather Case)(*Lưu ý: Khách hàng chỉ đc chọn 1 trong các chương trình trên,
+                    <br>Chương trình KM tính trên giá niêm yết, không áp dụng chung với KM khác)
+                </li>
+                <li>Trả góp 0% lãi suất thẻ tín dụng </li>
+            </ul>
+            <br><br>
+        <p style="font-weight: bold;">
+            Mô tả:
+        <p>
+            <br>
+            <ul style="font-size: 14px; line-height: 1.5;">
+                <li>@sanPham.MoTa</li>
+            </ul>
+        </p>
+    </div>
+    <div class="clear"></div>
+</div>
+

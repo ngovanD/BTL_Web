@@ -26,6 +26,8 @@ namespace BTL.Models
         private int giaGiam;
         private int soLuongCon;
 
+        private int soLuong;
+
         public int MaSanPham { get => maSanPham; set => maSanPham = value; }
         public string TenSanPham { get => tenSanPham; set => tenSanPham = value; }
         public string HinhAnh { get => hinhAnh; set => hinhAnh = value; }
@@ -41,5 +43,7 @@ namespace BTL.Models
         public int Gia { get => gia; set => gia = value; }
         public int GiaGiam { get => giaGiam; set => giaGiam = value; }
         public int SoLuongCon { get => soLuongCon; set => soLuongCon = value; }
+        public int SoLuong { get => soLuong; set => soLuong = value; }
+        public int ThanhTien { get => soLuong*Gia;}
     }
 }
