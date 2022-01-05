@@ -1,0 +1,61 @@
+﻿@model BTL.Models.Slide
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Chi tiết</h2>
+
+<div>
+    <h4>Slide</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Mã slide
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaSlide)
+        </dd>
+
+        <dt>
+            Tên slide
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenSlide)
+        </dd>
+
+        <dt>
+            Hình ảnh
+        </dt>
+
+        <dd>
+            @{
+                var ImagePath = "~/wwwroot/images/slides/" + Model.HinhAnh;
+            }
+            <img id="output" class="img-rounded" alt="Ảnh" width="180" height="200" src="@Url.Content(ImagePath)" /><br />
+            @Html.DisplayFor(model => model.HinhAnh)
+        </dd>
+
+        <dt>
+            Trạng thái
+        </dt>
+
+        <dd>
+            @if (Model.TrangThai == true)
+            {
+                <p>Hiển thị</p>
+            }
+            else
+            {
+                <p>Ẩn</p>
+            }
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Sửa", "Edit", new { id = Model.MaSlide }, htmlAttributes: new { @class = "btn btn-info btn-sm" }) 
+    @Html.ActionLink("Trở lại", "Index", null, htmlAttributes: new { @class = "btn btn-success btn-sm" })
+</p>

@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using BTL.Models;
+using PagedList;
 
 namespace BTL.Controllers.Admin
 {
@@ -15,9 +16,11 @@ namespace BTL.Controllers.Admin
         private ShopDienThoaiContext db = new ShopDienThoaiContext();
 
         // GET: TaiKhoans
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            return View(db.TaiKhoans.ToList());
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            return View(db.TaiKhoans.OrderBy(h => h.ID).ToPagedList(pageNumber, pageSize));
         }
 
         // GET: TaiKhoans/Details/5
@@ -52,6 +55,7 @@ namespace BTL.Controllers.Admin
             {
                 if (ModelState.IsValid)
                 {
+                    taiKhoan.LoaiTaiKhoan = "User";
                     db.TaiKhoans.Add(taiKhoan);
                     db.SaveChanges();
 
@@ -94,6 +98,7 @@ namespace BTL.Controllers.Admin
             {
                 if (ModelState.IsValid)
                 {
+                    taiKhoan.LoaiTaiKhoan = "User";
                     db.Entry(taiKhoan).State = EntityState.Modified;
                     db.SaveChanges();
 

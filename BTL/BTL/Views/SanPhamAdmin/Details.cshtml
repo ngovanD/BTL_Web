@@ -1,9 +1,14 @@
 ﻿@model BTL.Models.SanPham
+@using BTL.Models
 
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
-    var ImagePath = "~/wwwroot/images/" + Model.HinhAnh;
+    var ImagePath = "~/wwwroot/images/sanpham/" + Model.HinhAnh;
+}
+
+@{ 
+    var listSMD = ViewBag.DanhSachDungLuongMauSac as List<SanPhamKichThuocMauSacDTO>;
 }
 
 
@@ -13,7 +18,7 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-           Tên loại sản phẩm
+            Tên loại sản phẩm
         </dt>
 
         <dd>
@@ -21,7 +26,7 @@
         </dd>
 
         <dt>
-           Tên sản phẩm
+            Tên sản phẩm
         </dt>
 
         <dd>
@@ -38,7 +43,7 @@
         </dd>
 
         <dt>
-           Mô tả
+            Mô tả
         </dt>
 
         <dd>
@@ -62,7 +67,7 @@
         </dd>
 
         <dt>
-           Sản phẩm mới
+            Sản phẩm mới
         </dt>
 
         <dd>
@@ -77,9 +82,52 @@
             @Html.DisplayFor(model => model.NoiBat)
         </dd>
 
+        <dt>
+            Danh sách dung lượng - màu sắc
+        </dt>
+
+        <dd>
+
+            <table class="table">
+                <tr style="border:1px">
+                    <th>
+                        Kích thước
+                    </th>
+                    <th>
+                        Tên màu
+                    </th>
+                    <th>
+                        Giá
+                    </th>
+                    <th>
+                        Số lượng còn
+                    </th>
+                </tr>
+
+                @foreach (var item in listSMD)
+                {
+                    <tr style="border:1px">
+                        <td>
+                            @item.KichThuoc
+                        </td>
+                        <td>
+                            @item.TenMau
+                        </td>
+                        <td>
+                            @item.Gia.ToString("0,0") VND
+                        </td>
+                        <td>
+                            @item.SoLuongCon
+                        </td>
+                       
+                    </tr>
+                }
+            </table>      
+        </dd>
+
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Sửa", "Edit", new { id = Model.MaSanPham }) |
-    @Html.ActionLink("Quay lại", "Index")
+    @Html.ActionLink("Sửa", "Edit", new { id = Model.MaSanPham }, htmlAttributes: new { @class = "btn btn-info btn-sm" })
+    @Html.ActionLink("Quay lại", "Index", null, htmlAttributes: new { @class = "btn btn-info btn-sm" })
 </p>

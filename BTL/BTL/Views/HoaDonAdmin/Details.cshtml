@@ -1,42 +1,29 @@
 ﻿@model BTL.Models.HoaDon
-
+@using BTL.Models
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>Details</h2>
+@{ 
+    var thongTinKhachHang = ViewBag.thongTinLienHeKhachHang as ThongTinLienHe_KhachHang;
+    var listSanPham = ViewBag.listSanPham as List<SanPhamDto>;
+}
+
+<h2>Chi tiết hóa đơn</h2>
 
 <div>
-    <h4>HoaDon</h4>
-    <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.TaiKhoan.Email)
+            Mã hóa đơn:
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.TaiKhoan.Email)
+            @Html.DisplayFor(model => model.MaHoaDon)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ThongTinLienHe_KhachHang.HoTen)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ThongTinLienHe_KhachHang.HoTen)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TongTien)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TongTien)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.NgayLapHoaDon)
+            Ngày đặt:
         </dt>
 
         <dd>
@@ -44,16 +31,89 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.TrangThai)
+            Trạng thái:
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.TrangThai)
         </dd>
 
+        <dt>
+            Tổng tiền:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TongTien)
+        </dd>
+
+        <dt>
+            Họ tên khách hàng:
+        </dt>
+
+        <dd>
+            @thongTinKhachHang.HoTen
+        </dd>
+
+        <dt>
+            Số điện thoại:
+        </dt>
+
+        <dd>
+            @thongTinKhachHang.SoDienThoai
+        </dd>
+
+        <dt>
+            Địa chỉ giao:
+        </dt>
+
+        <dd>
+            @thongTinKhachHang.DiaChi
+        </dd>
+
+
+        <dt>
+            Ghi chú:
+        </dt>
+
+        <dd>
+            @thongTinKhachHang.GhiChu
+        </dd>
+
+        <br />
+        <br />
+
+        <dt>
+            Danh sách sản phẩm
+        </dt>
+
+        <dd>
+            <table class="table">
+                <tr style="border:1px">
+                    <th>Hình ảnh</th>
+                    <th>Sản phẩm</th>
+                    <th>Đơn Giá</th>
+                    <th>Số lượng</th>
+                    <th>Tạm tính</th>
+                </tr>
+
+                @foreach (var item in listSanPham)
+                {
+                    <tr style="border:1px">
+                        <td><img src="~/wwwroot/images/sanpham/@item.HinhAnh" alt="" style="width: 100px; height: 100px;"></td>
+                        <td>@item.TenSanPham - @item.TenMau - @item.KichThuoc</td>
+                        <td>@item.Gia</td>
+                        <td>@item.SoLuong</td>
+                        <td>@item.ThanhTien</td>
+                    </tr>
+                }
+            </table>
+
+        </dd>
+
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.MaHoaDon }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Sửa", "Edit", new { id = Model.MaHoaDon }, htmlAttributes: new { @class = "btn btn-info btn-sm" }) 
+    @Html.ActionLink("Xác nhận", "XacNhan", new {  Model.MaHoaDon }, htmlAttributes: new { @class = "btn btn-success btn-sm" }) 
+    @Html.ActionLink("Hủy", "Huy", new { Model.MaHoaDon }, htmlAttributes: new { @class = "btn btn-danger btn-sm" })  
 </p>

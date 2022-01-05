@@ -1,16 +1,18 @@
-﻿@model IEnumerable<BTL.Models.LoaiSanPham>
+﻿@model PagedList.IPagedList<BTL.Models.LoaiSanPham>
+@using PagedList.Mvc;
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 <h2 style="text-align:center">Quản lý loại sản phẩm</h2>
 
 <p>
-    @Html.ActionLink("Tạo Mới", "Create")
+    @Html.ActionLink("Tạo Mới", "Create", null, htmlAttributes: new { @class = "btn btn-success btn-sm" })
 </p>
-<table class="table" border="1">
+<table class="table" border="0">
     <tr style="border:1px">
         <th style="border:1px">
             Tên loại sản phẩm
@@ -23,10 +25,10 @@
     @foreach (var item in Model)
     {
         <tr style="border:1px">
-            <td >
+            <td>
                 @Html.DisplayFor(modelItem => item.TenLoaiSanPham)
             </td>
-            <td >
+            <td>
                 @{
                     string ImagePath = "~/wwwroot/images/loaisanpham/" + item.HinhAnh;
                 }
@@ -34,11 +36,17 @@
                 <br>
                 @Html.DisplayFor(modelItem => item.HinhAnh)
             </td>
-            <td >
-                @Html.ActionLink("Sửa", "Edit", new { id = item.MaLoaiSanPham }) |
-                @Html.ActionLink("Xóa", "Delete", new { id = item.MaLoaiSanPham })
+            <td>
+                @Html.ActionLink("Sửa", "Edit", new { id = item.MaLoaiSanPham }, htmlAttributes: new { @class = "btn btn-info btn-sm" })
+                @Html.ActionLink("Xóa", "Delete", new { id = item.MaLoaiSanPham }, htmlAttributes: new { @class = "btn btn-danger btn-sm" })
             </td>
         </tr>
     }
 
 </table>
+
+<div align="center">
+    Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page }))
+</div>

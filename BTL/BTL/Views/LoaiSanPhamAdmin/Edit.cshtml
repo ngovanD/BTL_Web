@@ -3,13 +3,13 @@
 @{
     ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
-    var ImagePath = "~/wwwroot/images/" + Model.HinhAnh;
+    var ImagePath = "~/wwwroot/images/loaisanpham/" + Model.HinhAnh;
 }
 
 
 
 
-@using (Html.BeginForm("Edit", "LoaiSanPhamAdmin", FormMethod.Post, new { enctype = "multipart/from-data" }))
+@using (Html.BeginForm("Edit", "LoaiSanPhamAdmin", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 

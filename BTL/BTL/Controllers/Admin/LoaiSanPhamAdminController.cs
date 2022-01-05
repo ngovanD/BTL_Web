@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using BTL.Models;
+using PagedList;
 
 namespace BTL.Controllers.Admin
 {
@@ -15,9 +16,11 @@ namespace BTL.Controllers.Admin
         private ShopDienThoaiContext db = new ShopDienThoaiContext();
 
         // GET: LoaiSanPhams
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            return View(db.LoaiSanPhams.ToList());
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            return View(db.LoaiSanPhams.OrderBy(h => h.MaLoaiSanPham).ToPagedList(pageNumber, pageSize));
         }
 
         // GET: LoaiSanPhams/Details/5
@@ -52,6 +55,15 @@ namespace BTL.Controllers.Admin
             {
                 if (ModelState.IsValid)
                 {
+                    loaiSanPham.HinhAnh = "";
+                    var f = Request.Files["ImageFile"];
+                    if (f != null && f.ContentLength > 0)
+                    {
+                        string FileName = System.IO.Path.GetFileName(f.FileName);
+                        string UploadFile = Server.MapPath("~/wwwroot/images/loaisanpham/" + FileName);
+                        f.SaveAs(UploadFile);
+                        loaiSanPham.HinhAnh = FileName;
+                    }
                     db.LoaiSanPhams.Add(loaiSanPham);
                     db.SaveChanges();
 
@@ -92,8 +104,22 @@ namespace BTL.Controllers.Admin
         {
             try
             {
+                LoaiSanPham sp = db.LoaiSanPhams.Find(loaiSanPham.MaLoaiSanPham);
                 if (ModelState.IsValid)
                 {
+                    var f = Request.Files["ImageFile"];
+                    if (f != null && f.ContentLength > 0)
+                    {
+                        string FileName = System.IO.Path.GetFileName(f.FileName);
+                        string UploadFile = Server.MapPath("~/wwwroot/images/loaisanpham/" + FileName);
+                        f.SaveAs(UploadFile);
+                        loaiSanPham.HinhAnh = FileName;
+                    }
+                    else
+                    {
+                        loaiSanPham.HinhAnh = sp.HinhAnh;
+                    }
+
                     db.Entry(loaiSanPham).State = EntityState.Modified;
                     db.SaveChanges();
 
